@@ -1,3 +1,8 @@
+# Sudoku HTML template page
+#  Untracked because the script modifies it at every step of solving Sudoku.
+#  Make sure you restore it to the original before editing and committing!
+sudoku.html
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

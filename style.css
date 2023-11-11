@@ -1,0 +1,23 @@
+table {
+	border-collapse: collapse;
+}
+
+.complete {
+	font-size: 3em;
+}
+
+.main td {
+	border: 3px solid black;
+}
+
+.square td {
+	border: 1px solid black;
+	text-align: center;
+}
+
+.hint td {
+	border: 1px dotted lightgray;
+	color: lightgray;
+	height: 1em;
+	width: 1em;
+}
