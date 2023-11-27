@@ -21,8 +21,8 @@ def generate_html():
 				html += '<tr>'
 				for l in range(0, 3):
 					possible_numbers = deepcopy(square[k, l])
-					if len(possible_numbers) == 1:
-						html += f'<td class="complete">{next(iter(possible_numbers))}</td>'
+					if type(possible_numbers) is int:
+						html += f'<td class="complete">{possible_numbers}</td>'
 					else:
 						html += '<td><table class="hint">'
 						for m in range(0, 3):
@@ -46,21 +46,31 @@ def generate_html():
 
 
 def modify_board():
-	y, x, number = [int(value) for value in input().split()]
+	try:
+		y, x, number = [int(value) for value in input().split()]
+	except ValueError:
+		print('Error: wrong value entered.')
+		return
+	if min(y, x, number) < 1 or max(y, x, number) > 9:
+		print('Error: wrong value entered.')
+		return
 	y, x = y-1, x-1
+	if type(board[y, x]) is int:
+		print('Error: this cell is already solved.')
+		return
 	if number not in board[y, x]:
 		print('Error: wrong number, valid numbers are:', board[y, x])
 		return
+	board[y, x] = number
 	for i in range(9):
-		if number in board[y, i]:
+		if type(board[y, i]) is set and number in board[y, i]:
 			board[y, i].remove(number)
 	for i in range(9):
-		if number in board[i, x]:
+		if type(board[i, x]) is set and number in board[i, x]:
 			board[i, x].remove(number)
 	for possible_numbers in board[y//3*3 : y//3*3+3, x//3*3 : x//3*3+3].reshape(9):
-		if number in possible_numbers:
+		if type(possible_numbers) is set and number in possible_numbers:
 			possible_numbers.remove(number)
-	board[y, x] = {number}
 
 
 def main():
